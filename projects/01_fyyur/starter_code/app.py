@@ -21,9 +21,10 @@ app = Flask(__name__)
 moment = Moment(app)
 app.config ['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:2468@localhost:5432/Fyyur'
 app.config ['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config.from_object('config')
+app.config ['PYTHONUNBUFFERED'] = ""
+#app.config.from_object('config')
 db = SQLAlchemy(app)
-migrate = Migrate(app, db)
+migrate = Migrate(app, db, render_as_batch=True)
 
 # TODO: connect to a local postgresql database
 
